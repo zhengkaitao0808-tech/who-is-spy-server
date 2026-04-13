@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Dockerfile for WhoIsSpy Django project.
-微信云托管 Docker 部署配置
-"""
+# Dockerfile for WhoIsSpy Django project
+# 微信云托管 Docker 部署配置
 
 FROM python:3.11-slim
 
@@ -33,9 +30,8 @@ RUN python manage.py collectstatic --noinput || true
 # 创建数据库迁移（如果需要）
 RUN python manage.py makemigrations --noinput || true
 
-# 暴露端口
-EXPOSE 8000
+# 暴露端口 - 云托管默认使用 80
+EXPOSE 80
 
 # 启动命令 - 使用 Daphne ASGI 服务器
-# Daphne 是性能和兼容性最佳的 ASGI 服务器，支持 HTTP 和 WebSocket
-CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "config.asgi:application"]
+CMD ["daphne", "-b", "0.0.0.0", "-p", "80", "config.asgi:application"]
