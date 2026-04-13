@@ -5,6 +5,9 @@ Django settings for WhoIsSpy project.
 """
 
 import os
+# 使用 PyMySQL 替代 mysqlclient（纯 Python 实现，无需编译）
+import pymysql
+pymysql.install_as_MySQLdb()
 from pathlib import Path
 
 # Build paths inside the project
